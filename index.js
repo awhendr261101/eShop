@@ -3,7 +3,7 @@ import path from 'path';
 import { connection as db } from './config/index.js';
 import { creatToken } from './middleware/authenticateUser.js';
 
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 import bodyParser from 'body-parser';
 
 const app = express();
@@ -110,6 +110,21 @@ router.patch('/User/:id', async (req, res) => {
     }
 })
 
+router.delete('/User/:id', (req, res) => {
+    try {
+        db.query(`DELETE FROM Users WHERE userID = ${req.params.id}`, (err) => {
+            if (err) throw new Error (err);
+            res.json({
+                status: res.statusCode,
+                msg: 'User deleted successfully'
+            })
+        })
+    } catch (error) {
+        
+    }
+
+})
+
 router.get('*', (req, res)=> {
     res.json(
         {
@@ -117,6 +132,43 @@ router.get('*', (req, res)=> {
             message: 'Page not found'
         }
     )
+})
+
+router.post('/login', (req, res)=> {
+    try {
+        const { emailAdd, pwd } = req.body
+        
+
+        db.query(`SELECT * FROM Users WHERE emailAdd = '${emailAdd}'`, async (error, result)=>{
+            if (error) throw new Error(error)
+            if(!result?.length){
+                res.json({
+                    statusCode: 401,
+                    message: 'You have entered an invalid email address'
+                })
+            } else {
+                const isvalidPwd = await compare(pwd, result[0].pwd)
+                if(isvalidPwd){
+                    const token = creatToken({email: emailAdd, password: pwd})
+                    res.status(200).json({
+                        statusCode: req.statusCode,
+                        message: 'Login successful',
+                        token,
+                        result: result[0]
+                    })
+                } else {
+                    res.json({
+                        status: 401,
+                        msg: 'Invalid password'
+                    })
+                }
+            }
+        })
+
+
+    } catch (error) {
+        
+    }
 })
 
 app.listen(port , () => {
