@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 const {sign , verify } = jwt
 
 function creatToken(user) {
+    
     return sign({
         emailAdd : user.emailAdd,
         pwd : user.pwd
