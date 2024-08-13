@@ -16,7 +16,7 @@ class User{
 
     // Fetch All Users
 
-    static fetchAllUsers(db,req, res){
+    static fetchAllUsers(req, res){
                 
         try {
             db.query('SELECT * FROM Users', (err, data) => {
@@ -35,7 +35,7 @@ class User{
 
     // Fetch User By ID
     
-    static fetchUserById(db,req, res){
+    static fetchUserById(req, res){
         try {
             const { id } = req.params;
             return db.query(`SELECT firstName, lastName, age FROM Users WHERE userID = ${id}` , (err, data) => {
@@ -52,7 +52,7 @@ class User{
         }
     }
 
-    async registerUser(db,req, res){
+    static async registerUser(req, res){
         try {
             let data = req.body
     
@@ -79,7 +79,7 @@ class User{
         }
     }
 
-    async updateUser(db,req, res){
+    static async updateUser(req, res){
         try {
             let data = req.body
     
@@ -102,7 +102,7 @@ class User{
         }
     }
 
-    deletUser(db,req, res){
+    static deletUser(req, res){
         try {
             db.query(`DELETE FROM Users WHERE userID = ${req.params.id}`, (err) => {
                 if (err) throw new Error (err);
@@ -116,7 +116,7 @@ class User{
         }
     }
 
-    login(db,req, res){
+    static login(req, res){
         try {
             const { emailAdd, pwd } = req.body
             
