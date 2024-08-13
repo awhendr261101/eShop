@@ -1,6 +1,6 @@
 import { User } from "./users";
 
-const users = new User
+const users = new User()
 
 export{
     users

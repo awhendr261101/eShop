@@ -29,12 +29,12 @@ router.get('^/$|/eShop', (req, res) =>{
 })
 
 router.get('/Users|/eShop/Users', (req, res) =>{
-    User.fetchAllUsers(db, req, res)
+    User.fetchAllUsers(req, res)
 })
 
 router.get('/User/:id|/eShop/User/:id', (req, res)=> {
 
-    User.fetchUserById(db,req, res)
+    User.fetchUserById(req, res)
 
 })
 
