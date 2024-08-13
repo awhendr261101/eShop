@@ -6,6 +6,8 @@ import { creatToken } from './middleware/authenticateUser.js';
 import { compare, hash } from 'bcrypt';
 import bodyParser from 'body-parser';
 
+import { User } from './model/users.js';
+
 const app = express();
 const port = +process.env.PORT || 4001;
 const router = express.Router();
@@ -27,36 +29,12 @@ router.get('^/$|/eShop', (req, res) =>{
 })
 
 router.get('/Users|/eShop/Users', (req, res) =>{
-    try {
-        db.query('SELECT * FROM Users', (err, data) => {
-            if(err) throw new Error(err);
-            res.status(200).json(res.statusCode, data)
-        })
-    } catch (err) {
-        res.json(
-            {
-                statusCode: 404,
-                message: err.message
-            }
-        )
-    }
+    User.fetchAllUsers(db, req, res)
 })
 
 router.get('/User/:id|/eShop/User/:id', (req, res)=> {
-    try {
-        const { id } = req.params;
-        db.query(`SELECT firstName, lastName, age FROM Users WHERE userID = ${id}` , (err, data) => {
-            if(err) throw new Error("Oops something went ");
-            res.status(200).json(data)
-        })
-    } catch (err) {
-        res.json(
-            {
-                statusCode: 404,
-                message: err.message
-            }
-        )
-    }
+
+    User.fetchUserById(db,req, res)
 
 })
 
