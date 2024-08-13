@@ -135,6 +135,7 @@ router.get('*', (req, res)=> {
 })
 
 router.post('/login', (req, res)=> {
+    ''
     try {
         const { emailAdd, pwd } = req.body
         
@@ -170,6 +171,8 @@ router.post('/login', (req, res)=> {
         
     }
 })
+
+
 
 app.listen(port , () => {
     console.log('Server is running on ' + port)
