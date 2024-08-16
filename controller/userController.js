@@ -3,9 +3,8 @@ import path from 'path';
 
 import bodyParser from 'body-parser';
 
-import { User } from '../model/users';
+import { User } from '../model/users.js';
 
-import { connection as db } from '../config';
 
 const userRouter = express.Router();
 
