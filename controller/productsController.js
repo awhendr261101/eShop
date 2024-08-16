@@ -4,12 +4,17 @@ import bodyParser from 'body-parser';
 
 import { Products } from '../model/products.js';
 
+import { verifyToken } from '../middleware/authenticateUser.js';
+
+
+
 
 const prodRouter = express.Router();
 
 prodRouter.use(bodyParser.json());
+prodRouter.use(verifyToken());
 
-prodRouter.get('/', (req, res) => {
+prodRouter.get('/', verifyToken, (req, res) => {
     Products.fetchAllProducts(req, res)
 })
 
