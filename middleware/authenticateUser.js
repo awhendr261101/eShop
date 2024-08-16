@@ -21,7 +21,7 @@ function creatToken(user) {
 function verifyToken(req, res, next) {
     const token = req?.headers['authorization']
 
-    console.log(req?.headers);
+    console.log(req?.headers['authorization']);
     
     if(token){
         if (verify(token, process.env.SECRET)) {
