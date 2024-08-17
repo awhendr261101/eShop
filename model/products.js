@@ -22,7 +22,7 @@ class Products{
         } catch (error) {
             res.json({
                 status: 500,
-                msg: 'An error occurred. Please try again later'
+                err: 'An error occurred. Please try again later'
             })
         }
     }
@@ -58,7 +58,7 @@ class Products{
         } catch (error) {
             res.json({
                 status: 500,
-                msg: 'An error occurred. Please try again later'
+                err: 'An error occurred. Please try again later'
             })
         }
     }
@@ -77,7 +77,8 @@ class Products{
             })
         } catch (error) {
             res.json({
-    
+                status: 404,
+                err: 'An error occurred. Please try again later'
             })
         }
     }
@@ -96,7 +97,7 @@ class Products{
         } catch (e) {
             res.json({
                 staus:400,
-                msg:e.message
+                err: 'There was an error updating the product'
             })
         }
     }
@@ -111,7 +112,10 @@ class Products{
                 })
             })
         } catch (error) {
-            
+            res.json({
+                status: 404,
+                err: 'An error occurred. Please try again later'
+            })
         }
     }
 

@@ -24,12 +24,10 @@ class User{
                 res.status(200).json(res.statusCode, data)
             })
         } catch (err) {
-            res.json(
-                {
-                    statusCode: 404,
-                    message: err.message
-                }
-            )
+            res.json({
+                staus:400,
+                err: 'There was an error getting all users'
+            })
         }
     }
 
@@ -43,12 +41,10 @@ class User{
                 res.status(200).json(data)
             })
         } catch (err) {
-            return res.json(
-                {
-                    statusCode: 404,
-                    message: err.message
-                }
-            )
+            res.json({
+                staus:400,
+                err: 'There was an error getting user'
+            })
         }
     }
 
@@ -75,7 +71,10 @@ class User{
                 
             })
         } catch (error) {
-            
+            res.json({
+                staus:400,
+                err: 'There was an error registering'
+            })
         }
     }
 
@@ -97,7 +96,7 @@ class User{
         } catch (e) {
             res.json({
                 staus:400,
-                msg:e.message
+                err: 'There was an error updating'
             })
         }
     }
@@ -112,7 +111,10 @@ class User{
                 })
             })
         } catch (error) {
-            
+            res.json({
+                staus:400,
+                err: 'There was an error deleting'
+            })
         }
     }
 
@@ -149,7 +151,10 @@ class User{
     
     
         } catch (error) {
-            
+            res.json({
+                staus:400,
+                err: 'There was an error logging in '
+            })
         }
     }
 }
