@@ -22,11 +22,11 @@ userRouter.post('/register', async (req, res) => {
     User.registerUser(req, res)
 })
 
-userRouter.patch('/user/:id', async (req, res) => {
+userRouter.patch('/:id', async (req, res) => {
     User.updateUser(req, res)
 });
 
-userRouter.delete('/user/:id', async (req, res) => {
+userRouter.delete('/:id', async (req, res) => {
     User.deletUser(req, res)
 });
 

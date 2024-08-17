@@ -46,6 +46,23 @@ class Products{
         }
     }
 
+    static fetchRecentProducts(req, res) {
+        try {
+            db.query('SELECT * FROM Products ORDER BY productID DESC LIMIT 5', (err, result) => {
+                if (err) throw new Error(err);
+                res.json({
+                    statusCode: 200,
+                    result : result
+                })
+            })
+        } catch (error) {
+            res.json({
+                status: 500,
+                msg: 'An error occurred. Please try again later'
+            })
+        }
+    }
+
     static addProduct(req, res){
         try {
             const data = req.body
