@@ -10,6 +10,23 @@
     display: none;
 }
 
+/* logo  */
+img[alt="logo"]{
+    width: 5rem;
+}
+
+img[me]{
+  width: 25rem;
+}
+
+/* select all images  */
+
+image {
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
+}
+
 /* App  */
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
